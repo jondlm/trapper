@@ -7,3 +7,4 @@ call data to the terminal.
 
     go run server.go
 
+![usage](https://raw.githubusercontent.com/jondlm/trapper/master/demo01.png)
