@@ -1,11 +1,17 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"io"
 	"io/ioutil"
+	"log"
 	"net/http"
 	"time"
+)
+
+var (
+	port = flag.Int("port", 3000, "port to listen on")
 )
 
 func check(e error) {
@@ -47,7 +53,11 @@ func hello(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	fmt.Println("Listening on port 3000")
+	flag.Parse()
+
+	addr := fmt.Sprintf("localhost:%d", *port)
+	fmt.Printf("Listening on %s\n", addr)
+
 	http.HandleFunc("/", hello)
-	http.ListenAndServe("localhost:3000", nil)
+	log.Fatal(http.ListenAndServe(addr, nil))
 }
